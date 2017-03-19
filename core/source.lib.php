@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  * 素材管理 用来替换 多媒体的上传与下载
  * Created by Lane.

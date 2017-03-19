@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  * 微信OAuth2.0获取认证
  * Created by lane.
@@ -16,7 +15,8 @@ class WeChatOAuth{
      * 将会跳转到redirect_uri/?code=CODE&state=STATE 通过GET方式获取code和state
      */
     public static function getCode($redirect_uri, $state=1, $scope='snsapi_base'){
-        if($redirect_uri[0] == '/'){
+       
+    	if($redirect_uri[0] == '/'){
             $redirect_uri = substr($redirect_uri, 1);
         }
         //公众号的唯一标识
@@ -26,6 +26,9 @@ class WeChatOAuth{
         $redirect_uri = urlencode($redirect_uri);
         //返回类型，请填写code
         $response_type = 'code';
+        
+        LOG::wlog(0, 'redirect_uri: ', $redirect_uri);
+        LOG::wlog(0, 'appid: ', WECHAT_APPID);
         //构造请求微信接口的URL
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$redirect_uri.'&response_type='.$response_type.'&scope='.$scope.'&state='.$state.'#wechat_redirect';
         header('Location: '.$url, true, 301);

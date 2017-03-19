@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  * 处理请求
  * Created by Lane.
@@ -17,6 +16,17 @@ class WechatRequest{
      * @return array|string
      */
     public static function switchType(&$request){
+    	/**
+    	 * 收到的信息格式
+    	 	{
+			    "tousername": "gh_ba62c2a2566e",
+			    "fromusername": "oyn6pw6ugJI-Wzl28rjcchSdp8FQ",
+			    "createtime": "1489853519",
+			    "msgtype": "text",
+			    "content": "hello world.",
+			    "msgid": "6398872140348137583"
+			}
+    	 */
         $data = array();
         switch ($request['msgtype']) {
             //事件
@@ -122,6 +132,7 @@ class WechatRequest{
                 return ResponsePassive::text($request['fromusername'], $request['tousername'], '收到未知的消息，我不知道怎么处理');
                 break;
         }
+        Log::wlog(0,'response data:',$data);
         return $data;
     }
 

@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  * 自定义菜单
  * Created by PhpStorm.
@@ -91,12 +90,16 @@ class Menu{
         //转换成JSON
         $data = json_encode($data);
         $data = urldecode($data);
+        Log::wlog(0,'menu1:',$data);
         //获取ACCESS_TOKEN
         $accessToken = AccessToken::getAccessToken();
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$accessToken;
         $result = Curl::callWebServer($url, $data, 'POST');
         if($result['errcode'] == 0){
+        	LOG::wlog(0, "create meau suc:", json_encode($result));
             return true;
+        }else {
+        	LOG::wlog(1, "create meau err:", json_encode($result));
         }
         return $result;
     }

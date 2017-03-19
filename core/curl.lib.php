@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  *
  * CURL工具

@@ -1,5 +1,8 @@
 <?php
-namespace LaneWeChat\Core;
+// namespace LaneWeChat\Core;
+
+// use LOG;
+
 /**
  * 微信公众平台来来路认证，处理中心，消息分发
  * Created by Lane.
@@ -8,7 +11,13 @@ namespace LaneWeChat\Core;
  * Time: 上午10:20
  * Mail: lixuan868686@163.com
  * Website: http://www.lanecn.com
+ * modified by goldenli 2017-3-18 21:38:58
  */
+
+//引入日志文件
+// require 'log.lib.php';
+// require 'wechatrequest.lib.php';
+
 class Wechat{
 
     /**
@@ -22,6 +31,7 @@ class Wechat{
      * @var array
      */
     private $request;
+    
 
     /**
      * 初始化，判断此次请求是否为验证请求，并以数组形式保存
@@ -40,6 +50,7 @@ class Wechat{
 
         //将数组键名转换为小写
         $this->request = array_change_key_case($xml, CASE_LOWER);
+
     }
 
     /**
@@ -85,6 +96,7 @@ class Wechat{
      * @return void
      */
     public function run() {
+    	Log::wlog(0,'request:', json_encode($this->request));
         return WechatRequest::switchType($this->request);
     }
 

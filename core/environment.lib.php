@@ -1,5 +1,4 @@
 <?php
-namespace LaneWeChat\Core;
 /**
  *
  * 环境判断类
